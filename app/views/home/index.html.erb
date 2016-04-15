@@ -1,0 +1,300 @@
+<%= content_for(:head_extra) do %>
+<style type="text/css">
+body {
+  background-color: white;
+}
+</style>
+<% end %>
+
+<section class="section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 section-title">
+				<h2>Top categories</h2>
+				<h5>Our convenient booking interface connects to our base of pre-selected providers for minimally invasive aesthetic procedures from the comfort of your home, office, or at the provider facility, seamlessly.</h5>
+			</div>
+		</div>
+		<div class="row top-categories-grid">
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-4.jpg') %>);">
+				<div class="box-default">
+					<div class="vertical-align">
+						<h3>Wrinkle Reduction</h3>
+					</div>
+				</div>
+				<div class="box-hover">
+					<div class="vertical-align">
+						<p class="cat-title">Wrinkle Reduction</p>
+						<div class="cat-descript">
+							Facial wrinkles can be prevented with simple treatments with little
+							to no downtime. Leading products such as Botox and Dysport can help
+							to slow down the aging process through wrinkle reduction by temporarily
+							weakening the muscles that cause the wrinkles to appear.
+						</div>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 1), class: 'btn btn-border-white' %>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-2.jpg') %>);">
+				<div class="box-default">
+					<div class="vertical-align">
+						<h3>Dermal Fillers</h3>
+					</div>
+				</div>
+				<div class="box-hover">
+					<div class="vertical-align">
+						<p class="cat-title">Dermal Fillers</p>
+						<div class="cat-descript">
+							During the aging process volume loss of the face typically occurs.  This makes
+							you appear tired and sad.  Dermal fillers are used to immediately enhance and
+							restore lost volume and turn back the aging process.  Commonly treated areas
+							are the cheeks, lips, temples, nasolabial folds, and jawline.
+						</div>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 2), class: 'btn btn-border-white' %>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-3.jpg') %>);">
+				<div class="box-default">
+					<div class="vertical-align">
+						<h3>Skin Treatments</h3>
+					</div>
+				</div>
+				<div class="box-hover">
+					<div class="vertical-align">
+						<p class="cat-title">Skin Treatments</p>
+						<div class="cat-descript">
+							Multiple options exist to help eliminate fine lines and wrinkles of the face,
+							as well as skin damage from sun exposure.  With the use of chemical peels,
+							laser resurfacing, and micro-needling the aging process can be reversed.
+						</div>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 3), class: 'btn btn-border-white' %>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-3.jpg') %>);">
+				<div class="box-default">
+					<div class="vertical-align">
+						<h3>Non Surgical Fat Reduction</h3>
+					</div>
+				</div>
+				<div class="box-hover">
+					<div class="vertical-align">
+						<p class="cat-title">Non Surgical Fat Reduction</p>
+						<div class="cat-descript">
+							Need to get rid of unwanted body fat and do not have the time for surgery?
+							Try these modalities to lose a few inches for a slimmer you.
+						</div>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 4), class: 'btn btn-border-white' %>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-1.jpg') %>);">
+				<div class="box-default">
+					<div class="vertical-align">
+						<h3>Hair reduction</h3>
+					</div>
+				</div>
+				<div class="box-hover">
+					<div class="vertical-align">
+						<p class="cat-title">Hair reduction</p>
+						<div class="cat-descript">
+							Do you have unwanted hair loss that you wish you could reverse.
+							With minimal invasive procedures you can have a full head of hair in no time.
+							These procedures are done with minimal anesthesia and require very little recovery.
+						</div>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 5), class: 'btn btn-border-white' %>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="background-image: url(<%= asset_path('categories/top-5.jpg') %>);">
+				<div class="box-default">
+					<div class="vertical-align">
+						<h3>Cellulite and Vein Treatment</h3>
+					</div>
+				</div>
+				<div class="box-hover">
+					<div class="vertical-align">
+						<p class="cat-title">Cellulite and Vein Treatment</p>
+						<div class="cat-descript">
+							Are you looking to get rid of unsightly cellulite and prominent veins
+							for a smooth leg appearance?  Multiple treatments options exist to
+							help to maintain a youthful look and restore your skins appearance.
+						</div>
+						<%= link_to 'View doctors', doctors_path(speciality_id: 6), class: 'btn btn-border-white' %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section feature-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 section-title">
+				<h2>About Somlos</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 feature-carousel">
+				<div class="feature-box">
+					<div class="icon"><img src="<%= asset_path('icon-1.png') %>" alt="icon" width="90"></div>
+					<h3>24/7 availability</h3>
+					<div class="descript">
+						<p>Simple, convenient, &amp; seamless. Schedule your appointment
+							and treatment with the provider of your choice on your time.
+							Be able to evaluate provider’s qualifications and track record
+							with our dynamic review process.  See all availabilities across
+							your location with geotargeting technology and choose ideal time
+							slots and providers according to your schedule. </p>
+					</div>
+				</div>
+				<div class="feature-box">
+					<div class="icon"><img src="<%= asset_path('icon-2.png') %>" alt="icon" width="90"></div>
+					<h3>Advanced technology</h3>
+					<div class="descript">
+						<p>Follow the latest trends and techniques in cosmetic surgery and
+							how providers are using them to enhance overall results.
+							See provider reviews and schedule your appointment.
+							Be able to pay for service prior to your visit to have a seamless
+							visit and cost savings via our rewards program.</p>
+					</div>
+				</div>
+				<div class="feature-box">
+					<div class="icon"><img src="<%= asset_path('icon-3.png') %>" alt="icon" width="90"></div>
+					<h3>Qualified doctors</h3>
+					<div class="descript">
+						<p>Our base of providers perform procedures using state of the art equipment,
+							board certified physicians and/or work with a board certified physician.
+							Each provider must practice within their scope of care and pass the SÖMLÖS
+							excellence of care to be selected as a SÖMLÖS provider.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 section-title">
+				<h2>Top Doctors</h2>
+				<h5>Our Top Doctors are certified Somlos professionals</h5>
+			</div>
+		</div>
+		<div class="row top-doctors-list">
+			<% DoctorUser.by_top_doctors(true).each_with_index do |doctor, index| %>
+				<% if index >= 4 then break end %>
+				<div class="col-sm-3">
+					<div class="doctor-box" style="background-image: url(<%= asset_path('doctors/doctor-' << (index+1).to_s << '.jpg') %>);">
+						<div class="doctor-info">
+							<h4>Dr. <%= doctor.full_name %></h4>
+							<p class="vocation"><%= doctor.speciality %></p>
+							<div class="hover">
+								<!--<div class="stars-box">
+									<span class="star star-5 active"></span>
+									<span class="star star-4"></span>
+									<span class="star star-3"></span>
+									<span class="star star-2"></span>
+									<span class="star star-1"></span>
+								</div>-->
+								<p class="address"><%= doctor.full_address %></p>
+								<div class="map-wrap">
+									<div class="map-box">
+										<div class="marker" data-lat="<%= doctor.latitude %>" data-lng="<%= doctor.longitude %>"></div>
+									</div>
+								</div>
+								<div class="location-time">35 minutes , from your location</div>
+								<p><a class="btn btn-border-white" href="<%= doctor_path(doctor) %>">find out more</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</section>
+<section class="section padd-top-none">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 section-title">
+				<h2>From the Blog</h2>
+			</div>
+		</div>
+		<div class="row blog-list-short">
+			<div class="col-sm-4">
+				<div class="post-item">
+					<a class="img" href="#">
+						<img src="<%= asset_path('posts/post-1.jpg') %>" width="390" alt="">
+						<div class="meta">
+							<span class="date">Aug 24 2015</span>
+							<span class="comments"><i class="fa fa-comment-o"></i> 24</span>
+						</div>
+					</a>
+					<div class="post-info">
+						<h4><a href="#">Example Blog post</a></h4>
+						<div class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							Ut enim ad minim veniam ...</div>
+						<a class="more-link" href="#">Read more</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="post-item">
+					<a class="img" href="#">
+						<img src="<%= asset_path('posts/post-2.jpg') %>" width="390" alt="">
+						<div class="meta">
+							<span class="date">Aug 23 2015</span>
+							<span class="comments"><i class="fa fa-comment-o"></i> 15</span>
+						</div>
+					</a>
+					<div class="post-info">
+						<h4><a href="#">Example Blog post</a></h4>
+						<div class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							Ut enim ad minim veniam ...</div>
+						<a class="more-link" href="#">Read more</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="post-item">
+					<a class="img" href="#">
+						<img src="<%= asset_path('posts/post-3.jpg') %>" width="390" alt="">
+						<div class="meta">
+							<span class="date">Aug 21 2015</span>
+							<span class="comments"><i class="fa fa-comment-o"></i> 38</span>
+						</div>
+					</a>
+					<div class="post-info">
+						<h4><a href="#">Example Blog post</a></h4>
+						<div class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							Ut enim ad minim veniam ...</div>
+						<a class="more-link" href="#">Read more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section padd-top-none">
+	<div class="container">
+		<div class="row blog-list-short">
+			<div class="post-item bigger">
+				<div class="col-md-4 col-sm-6 post-info">
+					<h4>Story of the week</h4>
+					<h5>This is an example story</h5>
+					<div class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</div>
+					<a class="more-link" href="#">Read more</a>
+				</div>
+				<div class="col-md-8 col-sm-6">
+					<a class="big-img" href="#"><img src="<%= asset_path('banner-1.jpg') %>" width="780" alt=""></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

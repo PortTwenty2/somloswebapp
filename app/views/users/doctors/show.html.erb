@@ -1,0 +1,187 @@
+<section class="section">
+  <div class="container container-lg">
+    <div class="white-bg-box booking-box xs-text-center">
+      <div class="row">
+        <div class="col-sm-9 push-bot-10">
+          <h1 class="h2 dsp-inline-block">Dr. <%= @user.full_name %></h1>
+          <div class="review-s dsp-inline-block">
+            <% if @user.house_calls %>Does at home visits<% end %>
+          </div>
+        </div>
+        <div class="col-sm-3 sm-text-right xs-text-center push-bot-10">
+          <% if signed_in? %>
+            <% if auth_user != @user %>
+              <a class="btn btn-primary btn-sm" href="#book-appointment"> <i class="fa fa-calendar"></i> Schedule</a>
+            <% end %>
+          <% else %>
+            <% link_to "#popup_login", class: 'btn btn-success btn-sm popup-modal' do %>
+              <i class="fa fa-calendar"></i> Schedule
+            <% end %>
+            <a class="btn btn-success btn-sm popup-modal" href="#popup_login"> <i class="fa fa-calendar"></i> Schedule</a>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+      <div class="row subtitle-location-section">
+        <div class="col-sm-6">
+          <h2><i class="fa fa-heartbeat"></i> <%= @user.speciality %></h2>
+        </div>
+        <div class="col-sm-6">
+          <p class="location sm-text-right xs-text-center"><i class="fa fa-map-marker"></i> <%= @user.full_address %></p>
+        </div>
+      </div>
+      <div class="row gallery-div-box">
+        <div class="col-sm-5 col-xs-12">
+          <div class="row zoom-gallery">
+            <div class="col-xs-6">
+              <div class="single-carousel">
+                <a href="<%= asset_url(@user.avatar(:medium)) %>"><%= image_tag @user.avatar(:medium), alt: @user.full_name, width: "220", height: "220" %></a>
+              </div>
+            </div>
+            <div class="col-xs-6 gallery-grid">
+              <!-- <a href="images/img-105x105-1.jpg"><img src="images/img-105x105-1.jpg" height="105" width="105" alt=""></a>
+              <a href="images/img-105x105-2.jpg"><img src="images/img-105x105-2.jpg" height="105" width="105" alt=""></a>
+              <a href="images/img-105x105-3.jpg"><img src="images/img-105x105-3.jpg" height="105" width="105" alt=""></a>
+              <a href="images/img-105x105-4.jpg"><img src="images/img-105x105-4.jpg" height="105" width="105" alt=""></a> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7 col-xs-12">
+          <div class="map-box">
+            <div class="marker" data-lat="<%= @user.latitude %>" data-lng="<%= @user.longitude %>"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Doctor's Bio</h3>
+          <%= @user.bio %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Schedule</h3>
+        </div>
+      </div>
+      <div class="week-days">
+        <table class="week-schedule">
+          <tr>
+            <% Date::DAYNAMES.each_with_index do |day,index| %>
+              <% if @user.days.include?(index.to_s) %>
+                <td>
+                  <h6><%= day %></h6>
+                  <div class="work-time">
+                    <%= formatted_time(@user.hours_from, true) %> - <br><%= formatted_time(@user.hours_to, true) %>
+                  </div>
+                </td>
+              <% else %>
+                <td class="not-work">
+                  <h6><%= day %></h6>
+                  <div class="work-time"><span class="big-text">×</span></div>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  <% if patient_signed_in? %>
+    <h2 id="book-appointment" class="push-bot-20 text-center">Book an Appointment</h2>
+
+      <div class="white-bg-box xs-text-center push-bot-20">
+        <%= simple_form_for(@appointment, url: appointments_path) do |f| %>
+          <div class="row push-bot-40">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+              <%= f.input :from, as: :hidden %>
+              <%= f.input :to, as: :hidden %>
+              <%= f.input :patient_user_id, as: :hidden %>
+              <%= f.input :doctor_user_id, as: :hidden %>
+              <%= f.input :title, label: false, collection: @reasons, prompt: "What is the reason for your visit?", input_html: { class: 'form-control' } %>
+            </div>
+          </div>
+        <% end %>
+
+        <div id='calendar'></div>
+      </div>
+    </div>
+  <% end %>
+
+  </div>
+</section>
+
+<% if patient_signed_in? %>
+  <% content_for(:footer_extra) do %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+          header: {
+            left:   '',
+            center: '',
+            right:  'today next'
+          },
+          defaultView: 'agendaWeek',
+          selectable: true,
+          selectHelper: false,
+          selectOverlap: false,
+          allDaySlot: false,
+          minTime: '<%= @user.hours_from.strftime("%H:%M:%S") %>',
+          maxTime: '<%= @user.hours_to.strftime("%H:%M:%S") %>',
+          snapDuration: '1:00:00',
+          columnFormat: 'ddd MM/DD',
+          contentHeight: "auto",
+          eventStartEditable: false,
+          eventDurationEditable: false,
+          timezone: 'local',
+          eventOverlap: function(stillEvent, movingEvent) {
+            return stillEvent.allDay && movingEvent.allDay;
+          },
+          select: function(start, end) {
+            console.log(start);
+            if($('#booked_hour_title').val() == '') {
+              $('#calendar').fullCalendar('unselect');
+              alert('Please choose a reason');
+              return;
+            }
+            var confirmed = confirm('Are you sure you want to make an appointment for that time?');
+            var eventData;
+
+            if (confirmed) {
+              $('#booked_hour_from').val(start);
+              $('#booked_hour_to').val(end);
+              // $('#new_booked_hour').submit();
+              $.ajax({
+                url: $('#new_booked_hour').attr('action'),
+                data: $('#new_booked_hour').serialize(),
+                type: 'post',
+                dataType: 'json',
+                success: function(data) {
+                  eventData = {
+                    title: $('#booked_hour_title').val(),
+                    start: start,
+                    end: end
+                  };
+                  $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                  alert('You will receive a confirmation when "Doctor\'s name" approves your appointment. Your requested appointment will appear in your Account page under "Pending Appoinments"');
+                }
+              });
+            }
+            $('#calendar').fullCalendar('unselect');
+          },
+          hiddenDays: <%= @hidden_days %>,
+          eventLimit: true, // allow "more" link when too many events
+          eventSources: [{
+            url: '<%= booked_hours_doctor_path %>'
+          }],
+          events: [{
+            start: getFirstdayOfWeek(),
+            end: getCurHour(),
+            rendering: 'background'
+          }]
+        });
+
+      });
+    </script>
+  <% end %>
+<% end %>
